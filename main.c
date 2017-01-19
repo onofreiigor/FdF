@@ -23,7 +23,7 @@ void	ft_error(char *er)
  int	ft_printf_key(int keykode, void *param)
  {
  	//printf("key kode %d\n", keykode);
- 	if (keykode == 53)
+ 	if (keykode == KEY_LINUX)
  		exit (1);
 
  	param++;

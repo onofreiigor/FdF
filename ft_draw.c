@@ -5,7 +5,7 @@
 void	ft_draw(td_list *list, void *mlx_ptr, void *win_ptr)
 {
 	td_list *tmp;
-	char *l1 = NULL;
+	//char *l1 = NULL;
 	char *l2 = NULL;
 	int  a = 20;
 	int i = 0;
@@ -22,7 +22,7 @@ void	ft_draw(td_list *list, void *mlx_ptr, void *win_ptr)
 	l2 = ft_strdup(tmp->line);
 	while (tmp != NULL)
 	{
-		l1 = ft_strdup(l2);
+		//l1 = ft_strdup(l2);
 		l2 = ft_strdup(tmp->line);
 		while (l2[i] != '\0')
 		{

@@ -10,6 +10,8 @@
 #define AL RAD * 45 //rotate x;
 #define BT RAD * 25	//roate y;
 #define GM RAD * 35 // rotate z;
+#define KEY_MAC 53
+#define KEY_LINUX 65307
 
 typedef struct	fdf_list
 {
