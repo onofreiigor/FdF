@@ -34,9 +34,9 @@ void	ft_print_seg(void *mlx_ptr, void *win_ptr, t_seg *seg)
 	tmp = seg;
 	while (tmp != NULL)
 	{
-		// printf("(%d,%d,%d) - (%d,%d,%d)\n", tmp->x1, tmp->y1, tmp->z1, 
-		// 	tmp->x2, tmp->y2, tmp->z2);
-		ft_line(mlx_ptr, win_ptr, tmp->x1, tmp->y1, tmp->x2, tmp->y2);
+		printf("(%d,%d,%d) - (%d,%d,%d)\n", tmp->x1, tmp->y1, tmp->z1, 
+			tmp->x2, tmp->y2, tmp->z2);
+		ft_line(mlx_ptr, win_ptr, tmp);
 		tmp = tmp->next;
 	}
 }
@@ -49,13 +49,16 @@ t_seg	*ft_to_seg(int **ar)
 
 	i = 1;
 	j = 0;
-	seg = ft_new_seg(j, i - 1, ar[i][j], j + 1, i - 1, ar[i][j + 1]);
+	seg = ft_new_seg(0, 0, 0, 0, 0, 0);
 	while (i < ar[0][0])
 	{
-		while (j < ar[0][1] - 1)
+		while (j < ar[0][1])
 		{
 			if (i == ar[0][0] - 1)
-				ft_add_seg(seg, j, i - 1, ar[i][j], j + 1, i - 1, ar[i][j + 1]);
+				if (j != ar[0][1] - 1)
+					ft_add_seg(seg, j, i - 1, ar[i][j], j + 1, i - 1, ar[i][j + 1]);
+				else
+					break ;
 			else if (j == ar[0][1] - 1)
 				ft_add_seg(seg, j, i - 1, ar[i][j], j, i, ar[i + 1][j]);
 			else
@@ -63,7 +66,6 @@ t_seg	*ft_to_seg(int **ar)
 				ft_add_seg(seg, j, i - 1, ar[i][j], j + 1, i - 1, ar[i][j + 1]);
 				ft_add_seg(seg, j, i - 1, ar[i][j], j, i, ar[i + 1][j]);
 			}
-			//printf("x: %d, y: %d, z: %d\n", tmp->x, tmp->y, tmp->z);
 			j++;
 		}
 		j = 0;

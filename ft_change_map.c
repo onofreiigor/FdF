@@ -2,15 +2,71 @@
 #include "libft/libft.h"
 #include "get_next_line.h"
 
+int *ft_calc_margin(t_seg *seg)
+{
+	int *ar;
+	t_seg *tmp;
+	int x_start;
+	int y_start;
+
+	ar = (int*)malloc(sizeof(int) * 2);
+	tmp = seg;
+	x_start = tmp->x1;
+	y_start = tmp->y1;
+
+	tmp = tmp->next;
+	ar[0] = x_start;
+	ar[1] = y_start;
+	while (tmp != NULL)
+	{
+		if (tmp->x1 < ar[0])
+			ar[0] = tmp->x1;
+		if (tmp->y1 < ar[0])
+			ar[0] = tmp->y1;
+		if (tmp->x2 < ar[0])
+			ar[0] = tmp->x2;
+		if (tmp->y2 < ar[0])
+			ar[0] = tmp->y2;
+		tmp = tmp->next;
+	}
+	ar[0] = x_start - ar[0];
+	ar[1] = y_start - ar[1];
+	return (ar);
+}
+
+int *ft_calc_window_size(t_seg *seg)
+{
+	int *ar;
+	t_seg *tmp;
+
+	ar = (int*)malloc(sizeof(int) * 2);
+	ar[0] = 0;
+	ar[1] = 0;
+	tmp = seg;
+	while (tmp != NULL)
+	{
+		if (tmp->x1 > ar[0])
+			ar[0] = tmp->x1;
+		if (tmp->y1 > ar[1])
+			ar[1] = tmp->y1;
+		if (tmp->x2 > ar[0])
+			ar[0] = tmp->x1;
+		if (tmp->y2 > ar[1])
+			ar[1] = tmp->y2;
+		tmp = tmp->next;
+	}
+	if (ar[0] > W_MAX)
+		ar[0] = W_MAX;
+	if (ar[1] > H_MAX)
+		ar[1] = H_MAX;
+	return (ar);
+}
+
 t_seg	*ft_incr_map(t_seg *seg)
 {
 	t_seg *tmp;
 	int size;
-	int marginx;
-	int marginy;
 
-	marginx = 200;
-	marginy = -100;
 	size = 35;
 	tmp = seg;
 	while (tmp != NULL)
@@ -21,10 +77,6 @@ t_seg	*ft_incr_map(t_seg *seg)
 		tmp->y2 *= size;
 		tmp->z1 *= 3;
 		tmp->z2 *= 3;
-		tmp->x1 += marginx;
-		tmp->x2 += marginx;
-		tmp->y1 += marginy;
-		tmp->y2 += marginy;
 		tmp = tmp->next;
 	}
 	return (seg);

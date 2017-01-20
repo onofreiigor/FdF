@@ -12,6 +12,8 @@
 #define GM RAD * 35 // rotate z;
 #define KEY_MAC 53
 #define KEY_LINUX 65307
+#define W_MAX 1920
+#define H_MAX 1080
 
 typedef struct	fdf_list
 {
@@ -57,12 +59,15 @@ void	ft_add_seg(t_seg *seg, int x1, int y1, int z1, int x2, int y2, int z2);
 t_seg	*ft_to_seg(int **ar);
 void	ft_print_seg(void *mlx_ptr, void *win_ptr, t_seg *seg);
 t_seg	*ft_incr_map(t_seg *seg);
+t_seg *ft_margin_map(t_seg *seg, int m_x, int m_y);
 t_seg *ft_rotate_xy(t_seg *seg);
 t_seg *ft_rotate_z(t_seg *seg);
 void	ft_draw(td_list *list, void *mlx_ptr, void *win_ptr);
 int ft_width(char *line);
-void	ft_line(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2);
+void	ft_line(void *mlx_ptr, void *win_ptr, t_seg *seg);
 int	ft_isometric(int x);
+int *ft_calc_window_size(t_seg *seg);
+int *ft_calc_margin(t_seg *seg);
 
 
 #endif

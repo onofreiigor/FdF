@@ -2,7 +2,7 @@
 #include "libft/libft.h"
 #include "get_next_line.h"
 
-void	ft_line(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2)
+void	ft_line(void *mlx_ptr, void *win_ptr, t_seg *seg)
 {
 	int i;
 	double dx;
@@ -13,10 +13,10 @@ void	ft_line(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2)
 	double x;
 	double y;
 
-	x = (double)x1;
-	y = (double)y1;
-	dx = x2 - x1;
-	dy = y2 - y1;
+	x = (double)seg->x1;
+	y = (double)seg->y1;
+	dx = seg->x2 - seg->x1;
+	dy = seg->y2 - seg->y1;
 	if (fabs(dx) > fabs(dy))
 		step = fabs(dx);
 	else
@@ -26,7 +26,7 @@ void	ft_line(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2)
 	i = 0;
 	while (i < step)
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, round(x), round(y), 0x0FFFFFF);
+		mlx_pixel_put(mlx_ptr, win_ptr, round(x), round(y), 0xFFFFFF);
 		x += xinc;
 		y += yinc;
 		i++;
