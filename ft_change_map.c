@@ -1,19 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_change_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ionofrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/20 16:21:37 by ionofrei          #+#    #+#             */
+/*   Updated: 2017/01/20 16:24:18 by ionofrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "libft/libft.h"
 #include "get_next_line.h"
 
-int *ft_calc_margin(t_seg *seg)
+int		*ft_calc_margin(t_seg *seg)
 {
-	int *ar;
-	t_seg *tmp;
-	int x_start;
-	int y_start;
+	int		*ar;
+	t_seg	*tmp;
+	int		x_start;
+	int		y_start;
 
 	ar = (int*)malloc(sizeof(int) * 2);
 	tmp = seg;
 	x_start = tmp->x1;
 	y_start = tmp->y1;
-
 	tmp = tmp->next;
 	ar[0] = x_start;
 	ar[1] = y_start;
@@ -34,10 +45,10 @@ int *ft_calc_margin(t_seg *seg)
 	return (ar);
 }
 
-int *ft_calc_window_size(t_seg *seg)
+int		*ft_calc_window_size(t_seg *seg)
 {
-	int *ar;
-	t_seg *tmp;
+	int		*ar;
+	t_seg	*tmp;
 
 	ar = (int*)malloc(sizeof(int) * 2);
 	ar[0] = 0;
@@ -64,8 +75,8 @@ int *ft_calc_window_size(t_seg *seg)
 
 t_seg	*ft_incr_map(t_seg *seg)
 {
-	t_seg *tmp;
-	int size;
+	t_seg	*tmp;
+	int		size;
 
 	size = 35;
 	tmp = seg;
@@ -82,13 +93,13 @@ t_seg	*ft_incr_map(t_seg *seg)
 	return (seg);
 }
 
-t_seg *ft_rotate_xy(t_seg *seg)
+t_seg	*ft_rotate_xy(t_seg *seg)
 {
-	t_seg *tmp;
-	int x1;
-	int y1;
-	int x2;
-	int y2;
+	t_seg	*tmp;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
 
 	tmp = seg;
 	while (tmp != NULL)
@@ -101,7 +112,6 @@ t_seg *ft_rotate_xy(t_seg *seg)
 		x1 = round(tmp->x1 * cos(BT) - tmp->z1 * sin(BT));
 		y2 = round(tmp->y2 * cos(AL) - tmp->z2 * sin(AL));
 		x2 = round(tmp->x2 * cos(BT) - tmp->z2 * sin(BT));
-		
 		tmp->x1 = x1;
 		tmp->y1 = y1;
 		tmp->x2 = x2;
@@ -111,13 +121,13 @@ t_seg *ft_rotate_xy(t_seg *seg)
 	return (seg);
 }
 
-t_seg *ft_rotate_z(t_seg *seg)
+t_seg	*ft_rotate_z(t_seg *seg)
 {
-	t_seg *tmp;
-	int x1;
-	int y1;
-	int x2;
-	int y2;
+	t_seg	*tmp;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
 
 	tmp = seg;
 	while (tmp != NULL)
@@ -130,7 +140,6 @@ t_seg *ft_rotate_z(t_seg *seg)
 		x1 = round(tmp->x1 * cos(GM) - tmp->y1 * sin(GM));
 		y2 = round(tmp->y2 * cos(GM) + tmp->x2 * sin(GM));
 		x2 = round(tmp->x2 * cos(GM) - tmp->y2 * sin(GM));
-		
 		tmp->x1 = x1;
 		tmp->y1 = y1;
 		tmp->x2 = x2;

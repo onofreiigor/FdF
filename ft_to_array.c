@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_to_array.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ionofrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/20 16:20:27 by ionofrei          #+#    #+#             */
+/*   Updated: 2017/01/20 16:21:19 by ionofrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "libft/libft.h"
 #include "get_next_line.h"
@@ -25,18 +37,13 @@ void	ft_print_arr(int **ar)
 	}
 }
 
-int **ft_to_array(td_list *list)
+int		**ft_create_array(t_list_line *list)
 {
-	td_list *tmp;
-	int **ar;
-	int i;
-	int j;
-	int a;
-	int k;
-	int len;
-	char *line;
+	int			**ar;
+	int			i;
+	int			k;
+	int			len;
 
-	tmp = list;
 	k = ft_count_list(list) + 1;
 	len = ft_width(list->line);
 	ar = malloc(sizeof(int*) * k);
@@ -45,22 +52,37 @@ int **ft_to_array(td_list *list)
 	while (i < k)
 	{
 		ar[i] = (int*)malloc(sizeof(int) * len);
-		j = 0;
-		a = 0;
-		line = ft_strdup(tmp->line);
-		while (line[j] != '\0')
-		{
-			if (line[j] != ' ' && (line[j - 1] == ' ' || j == 0))
-			{
-				ar[i][a] = ft_atoi(&line[j]);
-				a++;
-			}
-			j++;
-		}
-		tmp = tmp->next;
 		i++;
 	}
 	ar[0][0] = k;
 	ar[0][1] = len;
+	return (ar);
+}
+
+int		**ft_to_array(t_list_line *list)
+{
+	int			**ar;
+	int			i;
+	int			j;
+	int			a;
+
+	ar = ft_create_array(list);
+	i = 1;
+	while (i < ar[0][0])
+	{
+		j = 0;
+		a = 0;
+		while (list->line[j] != '\0')
+		{
+			if (list->line[j] != ' ' && (list->line[j - 1] == ' ' || j == 0))
+			{
+				ar[i][a] = ft_atoi(&list->line[j]);
+				a++;
+			}
+			j++;
+		}
+		list = list->next;
+		i++;
+	}
 	return (ar);
 }

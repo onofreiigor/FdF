@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_margin_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ionofrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/20 16:24:33 by ionofrei          #+#    #+#             */
+/*   Updated: 2017/01/20 16:25:14 by ionofrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "libft/libft.h"
 #include "get_next_line.h"
 
-t_seg *ft_margin_map(t_seg *seg, int m_x, int m_y)
+t_seg	*ft_margin_map(t_seg *seg, int m_x, int m_y)
 {
 	t_seg *tmp;
 

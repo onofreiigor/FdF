@@ -6,7 +6,7 @@
 /*   By: ionofrei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 14:15:17 by ionofrei          #+#    #+#             */
-/*   Updated: 2017/01/20 15:59:49 by ionofrei         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:13:05 by ionofrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_error(char *er)
 	exit(1);
 }
 
-int	ft_printf_key(int keykode, void *param)
+int		ft_printf_key(int keykode, void *param)
 {
 	if (keykode == KEY_MAC)
 		exit(1);
@@ -31,7 +31,7 @@ int	ft_printf_key(int keykode, void *param)
 	return (0);
 }
 
-int ft_width(char *line)
+int		ft_width(char *line)
 {
 	int k;
 	int i;
@@ -47,45 +47,28 @@ int ft_width(char *line)
 	return (k);
 }
 
-t_seg *ft_draw_square()
+int		main(int ac, char **av)
 {
-	t_seg *square;
-
-	square = ft_new_seg(0, 0, 0, 50, 0, 0);
-	ft_add_seg(square, 50, 0, 0, 50, 50 ,0);
-	ft_add_seg(square, 0, 0, 0, 0, 50 ,0);
-	ft_add_seg(square, 0, 50, 0, 50, 50, 0);
-
-	return (square);
-}
-
-int	main(int ac, char **av)
-{
-	void *mlx_ptr;
-	void *win_ptr;
-	int fd;
-	int *ar;
-	int *m_ar;
-	t_seg *segment;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		fd;
+	int		*ar;
+	t_seg	*segment;
 
 	if (ac != 2)
 		ft_error("NO file");
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		ft_error("Open file");
-
 	segment = ft_to_seg(ft_to_array(ft_to_list(fd)));
 	segment = ft_incr_map(segment);
 	segment = ft_rotate_z(segment);
 	segment = ft_rotate_xy(segment);
-
 	mlx_ptr = mlx_init();
-	m_ar = ft_calc_margin(segment);
-	segment = ft_margin_map(segment, m_ar[0], m_ar[1]);
+	ar = ft_calc_margin(segment);
+	segment = ft_margin_map(segment, ar[0], ar[1]);
 	ar = ft_calc_window_size(segment);
 	win_ptr = mlx_new_window(mlx_ptr, ar[0], ar[1], "FDF");
-
 	ft_print_seg(mlx_ptr, win_ptr, segment);
-
 	mlx_key_hook(win_ptr, ft_printf_key, 0);
 	mlx_loop(mlx_ptr);
 	close(fd);

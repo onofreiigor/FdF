@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_line.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ionofrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/20 16:13:17 by ionofrei          #+#    #+#             */
+/*   Updated: 2017/01/20 16:14:35 by ionofrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "libft/libft.h"
 #include "get_next_line.h"
 
-int ft_count_list(td_list *list)
+int			ft_count_list(t_list_line *list)
 {
-	td_list *tmp;
-	int k;
+	t_list_line	*tmp;
+	int			k;
 
 	k = 0;
 	tmp = list;
@@ -17,9 +29,9 @@ int ft_count_list(td_list *list)
 	return (k + 1);
 }
 
-void	ft_print_list(td_list *list)
+void		ft_print_list(t_list_line *list)
 {
-	td_list *tmp;
+	t_list_line *tmp;
 
 	tmp = list;
 	printf("Strat List Line:\n");
@@ -30,20 +42,19 @@ void	ft_print_list(td_list *list)
 	}
 }
 
-td_list *ft_new_list(char *line)
+t_list_line	*ft_new_list(char *line)
 {
-	td_list *new;
+	t_list_line *new;
 
-	new = (td_list*)malloc(sizeof(td_list));
+	new = (t_list_line*)malloc(sizeof(t_list_line));
 	new->line = ft_strdup(line);
 	new->next = NULL;
-
 	return (new);
 }
 
-void	ft_add_list(td_list *list, char *line)
+void		ft_add_list(t_list_line *list, char *line)
 {
-	td_list *tmp;
+	t_list_line *tmp;
 
 	tmp = list;
 	while (tmp->next != NULL)
@@ -51,11 +62,11 @@ void	ft_add_list(td_list *list, char *line)
 	tmp->next = ft_new_list(line);
 }
 
-td_list *ft_to_list(int fd)
+t_list_line	*ft_to_list(int fd)
 {
-	td_list *list;
-	int j;
-	char *line;
+	t_list_line	*list;
+	int			j;
+	char		*line;
 
 	j = 0;
 	while (get_next_line(fd, &line) > 0)

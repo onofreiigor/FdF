@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_segment.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ionofrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/20 16:14:54 by ionofrei          #+#    #+#             */
+/*   Updated: 2017/01/20 16:18:47 by ionofrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "libft/libft.h"
 #include "get_next_line.h"
 
-t_seg *ft_new_seg(int x1, int y1, int z1, int x2, int y2, int z2)
+t_seg	*ft_new_seg(int x1, int y1, int z1, int x2, int y2, int z2)
 {
 	t_seg *new;
 
@@ -34,8 +46,6 @@ void	ft_print_seg(void *mlx_ptr, void *win_ptr, t_seg *seg)
 	tmp = seg;
 	while (tmp != NULL)
 	{
-		printf("(%d,%d,%d) - (%d,%d,%d)\n", tmp->x1, tmp->y1, tmp->z1, 
-			tmp->x2, tmp->y2, tmp->z2);
 		ft_line(mlx_ptr, win_ptr, tmp);
 		tmp = tmp->next;
 	}
@@ -43,9 +53,9 @@ void	ft_print_seg(void *mlx_ptr, void *win_ptr, t_seg *seg)
 
 t_seg	*ft_to_seg(int **ar)
 {
-	t_seg *seg;
-	int i;
-	int j;
+	t_seg	*seg;
+	int		i;
+	int		j;
 
 	i = 1;
 	j = 0;
@@ -56,7 +66,8 @@ t_seg	*ft_to_seg(int **ar)
 		{
 			if (i == ar[0][0] - 1)
 				if (j != ar[0][1] - 1)
-					ft_add_seg(seg, j, i - 1, ar[i][j], j + 1, i - 1, ar[i][j + 1]);
+					ft_add_seg(seg, j, i - 1, ar[i][j],
+							j + 1, i - 1, ar[i][j + 1]);
 				else
 					break ;
 			else if (j == ar[0][1] - 1)
@@ -71,6 +82,5 @@ t_seg	*ft_to_seg(int **ar)
 		j = 0;
 		i++;
 	}
-	//printf("x1: %d y1: %d x2: %d y2: %d\n", seg->x1, seg->y1, seg->x2, seg->y2);
 	return (seg);
 }
